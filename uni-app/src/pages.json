@@ -1,6 +1,9 @@
 {
 	"pages": [
 		{
+			"path": "pages/product/index"			
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "仿微博 - uni-app版",

@@ -3,7 +3,7 @@ import Index from './pages/index'
 import './app.css'
 
 if (process.env.TARO_ENV === 'weapp' || process.env.TARO_ENV === 'alipay') {
-  require('./utils/perf')
+  require('./utils/hook')
 }
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
