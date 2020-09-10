@@ -1,5 +1,5 @@
 {
-    "navigationBarTitleText": "仿微博 - 原生小程序版",
+    "navigationBarTitleText": " 原生小程序版",
     "enablePullDownRefresh": true,
     "backgroundTextStyle": "dark",
     "usingComponents": {

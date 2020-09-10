@@ -28,7 +28,9 @@ const config = {
       }]
     ]
   },
-  plugins: [],
+  plugins:[
+    '@tarojs/plugin-terser'
+],
   defineConstants: {
   },
   mini: {

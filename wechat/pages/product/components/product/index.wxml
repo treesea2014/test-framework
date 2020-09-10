@@ -1,0 +1,4 @@
+<view wx:for="{{dataList}}" wx:for-item="item" wx:key="index">
+    <view>{{index}}{{item.skuName}}</view>
+    <image src="{{item.imgUrl}}" />
+</view>

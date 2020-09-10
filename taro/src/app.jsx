@@ -30,12 +30,14 @@ class App extends Component {
    */
   config = {
     pages: [
+      'pages/home/index',
+      'pages/product/index',
       'pages/index/index'
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: '仿微博 - taro版',
+      navigationBarTitleText: ' taro 2.2.11 版',
       navigationBarTextStyle: 'black'
     }
   }

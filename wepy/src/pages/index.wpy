@@ -39,7 +39,7 @@ import Api from '@/utils/api.js';
 
 export default class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '仿微博 - wepy版',
+    navigationBarTitleText: ' wepy版',
     enablePullDownRefresh: true,
     backgroundTextStyle: 'dark',
     usingComponents: {}

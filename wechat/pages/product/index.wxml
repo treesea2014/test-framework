@@ -1,0 +1,9 @@
+<view>
+    <view>
+        <text>{{dataList.length}}</text>
+        <button bindtap="getResult">获取结果</button>
+    </view>
+    <view wx:for="{{dataList}}" wx:for-item="item" wx:key="index">
+          <product dataList="{{item}}"/>
+    </view>
+</view>

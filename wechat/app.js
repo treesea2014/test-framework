@@ -1,4 +1,4 @@
 //app.js
-import './utils/perf.js'
+import './utils/hook.js'
 App({
 })

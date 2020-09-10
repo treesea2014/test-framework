@@ -1,0 +1,8 @@
+<view>
+    <button bindtap="gotoProduct" data-size="10">商品列表10</button>
+    <button bindtap="gotoProduct" data-size="20">商品列表20</button>
+    <button bindtap="gotoProduct" data-size="30">商品列表30</button>
+    <button bindtap="gotoProduct" data-size="40">商品列表40</button>
+    <button bindtap="gotoProduct" data-size="50">商品列表50</button>
+    <button bindtap="gotoProduct" data-size="100">商品列表100</button>
+</view>
