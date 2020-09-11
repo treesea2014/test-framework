@@ -1,15 +1,20 @@
+import {PAGE_TIME, COMPONENT_TIME} from './timeStore'
 
 const oldPage = Page
 Page = function (options) {
     const oldOnLoad = options.onLoad
     options.onLoad = function (args) {
         let oldSetData = this.setData
+        console.log('Page oldSetData', oldSetData)
         this.setData = function setData(data, callback) {
             if (Object.keys(data).length === 0) return // 忽略空数据
+            console.log('data======>', data)
             let startTime = Date.now()
             oldSetData.call(this, data, () => {
                 let endTime = Date.now()
-                console.error('页面=======>渲染耗时：', startTime, endTime, endTime - startTime)
+                let diff = endTime - startTime
+                PAGE_TIME.push(diff)
+                console.error('页面=======>渲染耗时：', startTime, endTime, diff)
                 callback && callback()
             })
         }
@@ -21,15 +26,16 @@ Page = function (options) {
 const oldComponent = Component
 Component = function (options) {
     const oldCreated = options.created
-    // 兼容微信小程序和支付宝
+    // 兼容微信小程序
     options.created = options.onInit = function (args) {
+        console.log('this.is', this.is)
         let oldSetData = this.setData
         this.setData = function setData(data, callback) {
             if (Object.keys(data).length === 0) return // 忽略空数据
-            let startTime = Date.now()
+            console.log('data========>', data)
             oldSetData.call(this, data, () => {
                 let endTime = Date.now()
-                console.error('组件=======>渲染耗时：', startTime, endTime, endTime - startTime)
+                COMPONENT_TIME.push(endTime)
                 callback && callback()
             })
         }

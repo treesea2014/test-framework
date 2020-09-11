@@ -1,30 +1,67 @@
 <template>
-  <view>
     <view>
-      <text >{{ title }}</text>
+        <view>
+            <button @click="getResult">获取结果</button>
+            <button @click="start()">start</button>
+        </view>
+        <view v-for="(item, index) in dataList" :key="index">
+            {{item.length}}
+            <product :dataList="item"/>
+        </view>
     </view>
-    <view v-for="(item, index) in dataList" :key="index">
-      <view> {{ index }}{{ item.skuName }} </view>
-      <image :src="item.imgUrl" mode=""></image>
-    </view>
-  </view>
 </template>
 
 <script>
-import { data100 } from "./data/data100.js";
-export default {
-  data() {
-    return {
-      title: "100",
-      dataList: [],
+    import {getAverage, init} from "./../../utils/timeStore"
+    import {data100} from "./data/data100.js";
+    import product from "./components/product/index";
+
+    export default {
+        components: {
+            product
+        },
+        data() {
+            return {
+                title: "100",
+                dataList: [],
+            };
+        },
+        onLoad(options) {
+            console.log("data100", data100);
+        },
+        methods: {
+            setPage(pageSize = 10) {
+                let showList = [];
+                pageSize = pageSize - 0;
+                let pageNum = Math.floor(data100.length / pageSize);
+                if (data100.length % pageSize > 0) {
+                    pageNum = pageNum + 1;
+                }
+                for (let i = 0; i < pageNum; i++) {
+                    let start = i * pageSize;
+                    let end = i * pageSize + pageSize;
+                    console.log(start, end);
+                    showList[i] = data100.slice(start, end);
+                    let timeout = setTimeout(() => {
+                        this.dataList.push(showList[i])
+                        clearTimeout(timeout);
+                    }, i * 1000);
+                }
+            },
+            getResult() {
+                wx.showModal({
+                    content: getAverage().toString(),
+                });
+            },
+            start(){
+                init()
+                this.setPage(10);
+            }
+        },
+        onUnload() {
+            init();
+        },
     };
-  },
-  onLoad() {
-    console.log("data100", data100);
-    this.dataList = data100.slice(0, 20);
-  },
-  methods: {},
-};
 </script>
 
 <style></style>

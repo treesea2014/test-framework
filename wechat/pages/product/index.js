@@ -5,8 +5,6 @@ Page({
         dataList: []
     },
     onLoad(options) {
-        console.log("data100", data100)
-        this.setPage(options.pageSize)
     },
     setPage(pageSize = 10) {
         let showList = []; pageSize = pageSize - 0;
@@ -31,6 +29,10 @@ Page({
         wx.showModal({
             content: getAverage().toString()
         })
+    },
+    start(){
+        init()
+        this.setPage(10)
     },
     onUnload() {
         init()
