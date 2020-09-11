@@ -1,13 +1,15 @@
-import { data100 } from "./data/data100"
-import { getAverage, init } from "./../../utils/timeStore"
+import {data100} from "./data/data100"
+import {getAverage, init, PAGE_SIZE} from "./../../utils/timeStore"
+
 Page({
     data: {
         dataList: []
     },
     onLoad(options) {
     },
-    setPage(pageSize = 10) {
-        let showList = []; pageSize = pageSize - 0;
+    setPage() {
+        let showList = [];
+        let pageSize = PAGE_SIZE;
         let pageNum = Math.floor(data100.length / pageSize);
         if (data100.length % pageSize > 0) {
             pageNum = pageNum + 1
@@ -30,11 +32,12 @@ Page({
             content: getAverage().toString()
         })
     },
-    start(){
-        init()
-        this.setPage(10)
+    start(e) {
+        let {size} = e.currentTarget.dataset
+        init(size)
+        this.setPage()
     },
     onUnload() {
-        init()
+
     }
 })

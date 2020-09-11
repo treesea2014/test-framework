@@ -1,8 +1,12 @@
 <template>
     <view>
         <view>
-            <button @click="getResult">获取结果</button>
-            <button @click="start()">start</button>
+            <button @click="start(10)">每页渲染10条</button>
+            <button @click="start(20)">每页渲染20条</button>
+            <button @click="start(30)">每页渲染30条</button>
+            <button @click="start(50)">每页渲染50条</button>
+            <button @click="start(100)">每页渲染100条</button>
+            <button @click="getResult" type="primary">获取结果</button>
         </view>
         <view v-for="(item, index) in dataList" :key="index">
             {{item.length}}
@@ -12,7 +16,7 @@
 </template>
 
 <script>
-    import {getAverage, init} from "./../../utils/timeStore"
+    import {getAverage, init, PAGE_SIZE} from "./../../utils/timeStore"
     import {data100} from "./data/data100.js";
     import product from "./components/product/index";
 
@@ -30,22 +34,22 @@
             console.log("data100", data100);
         },
         methods: {
-            setPage(pageSize = 10) {
+            setPage() {
                 let showList = [];
-                pageSize = pageSize - 0;
+                let pageSize = PAGE_SIZE;
                 let pageNum = Math.floor(data100.length / pageSize);
                 if (data100.length % pageSize > 0) {
-                    pageNum = pageNum + 1;
+                    pageNum = pageNum + 1
                 }
                 for (let i = 0; i < pageNum; i++) {
                     let start = i * pageSize;
                     let end = i * pageSize + pageSize;
-                    console.log(start, end);
-                    showList[i] = data100.slice(start, end);
+                    console.log(start, end)
+                    showList[i] = data100.slice(start, end)
                     let timeout = setTimeout(() => {
                         this.dataList.push(showList[i])
-                        clearTimeout(timeout);
-                    }, i * 1000);
+                        clearTimeout(timeout)
+                    }, i * 1000)
                 }
             },
             getResult() {
@@ -53,9 +57,9 @@
                     content: getAverage().toString(),
                 });
             },
-            start(){
-                init()
-                this.setPage(10);
+            start(size) {
+                init(size)
+                this.setPage()
             }
         },
         onUnload() {

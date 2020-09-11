@@ -9,12 +9,9 @@ Page = function (options) {
         this.setData = function setData(data, callback) {
             if (Object.keys(data).length === 0) return // 忽略空数据
             console.log('data======>', data)
-            let startTime = Date.now()
             oldSetData.call(this, data, () => {
                 let endTime = Date.now()
-                let diff = endTime - startTime
-                PAGE_TIME.push(diff)
-                console.error('页面=======>渲染耗时：', startTime, endTime, diff)
+                PAGE_TIME.push(endTime)
                 callback && callback()
             })
         }

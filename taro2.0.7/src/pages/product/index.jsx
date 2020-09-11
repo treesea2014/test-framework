@@ -1,7 +1,7 @@
 import Taro, {Component} from "@tarojs/taro";
 import {View, Image, Button} from "@tarojs/components";
 import {data100} from "./data/data100.js";
-import {getAverage, init} from "./../../utils/timeStore"
+import {getAverage, init, PAGE_SIZE} from "./../../utils/timeStore"
 import Product from "./components/product"
 
 export default class Index extends Component {
@@ -17,9 +17,9 @@ export default class Index extends Component {
         console.log("data100", data100);
     }
 
-    setPage(pageSize = 100) {
+    setPage() {
         let showList = [];
-        pageSize = pageSize - 0;
+        let pageSize = PAGE_SIZE;
         let pageNum = Math.floor(data100.length / pageSize);
         if (data100.length % pageSize > 0) {
             pageNum = pageNum + 1;
@@ -41,13 +41,17 @@ export default class Index extends Component {
     }
 
 
-
     render() {
         let {dataList} = this.state;
         return (
             <View>
-                <Button onClick={this.getResult.bind(this)}>获取结果</Button>
-                <Button onClick={this.start.bind(this)}>start</Button>
+                <Button onClick={this.start.bind(this, 10)}>每页渲染10</Button>
+                <Button onClick={this.start.bind(this, 20)}>每页渲染20</Button>
+                <Button onClick={this.start.bind(this, 30)}>每页渲染30</Button>
+                <Button onClick={this.start.bind(this, 40)}>每页渲染40</Button>
+                <Button onClick={this.start.bind(this, 50)}>每页渲染50</Button>
+                <Button onClick={this.start.bind(this, 100)}>每页渲染100</Button>
+                <Button onClick={this.getResult.bind(this)} type='primary'>获取结果</Button>
                 {dataList.map((item, index) => {
                     return <Product dataList={item} key={index}/>
                 })}
@@ -56,12 +60,13 @@ export default class Index extends Component {
     }
 
     getResult() {
-        wx.showModal({
+        Taro.showModal({
             content: getAverage().toString(),
         });
     }
-    start(){
-        init()
+
+    start(size) {
+        init(size)
         this.setPage(10)
     }
 

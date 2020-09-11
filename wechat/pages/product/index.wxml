@@ -1,8 +1,12 @@
 <view>
     <view>
         <text>{{dataList.length}}</text>
-        <button bindtap="getResult">获取结果</button>
-        <button bindtap="start">start</button>
+        <button bindtap="start" data-size="{{10}}" >每页渲染10条数据</button>
+        <button bindtap="start" data-size="{{20}}" >每页渲染20条数据</button>
+        <button bindtap="start" data-size="{{30}}" >每页渲染30条数据</button>
+        <button bindtap="start" data-size="{{50}}" >每页渲染50条数据</button>
+        <button bindtap="start" data-size="{{100}}" >每页渲染100条数据</button>
+        <button bindtap="getResult" type="primary">获取结果</button>
     </view>
     <view wx:for="{{dataList}}" wx:for-item="item" wx:key="index">
           <product dataList="{{item}}"/>
